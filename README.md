@@ -1,6 +1,6 @@
 # S.P.E.C.T.R.A. // AI Voice Detection & Audio Diagnostics Lab
 
-S.P.E.C.T.R.A. (Spectral Pattern Evaluation & Classification Telemetry for Recorded Audio) is a modern full-stack web application designed to detect whether a voice recording is human (organic) or AI-generated (synthetic) using real-time spectral audio analysis. 
+S.P.E.C.T.R.A. (Spectral Pattern Evaluation & Classification Telemetry for Recorded Audio) for fun is a modern full-stack web application designed to detect whether a voice recording is human (organic) or AI-generated (synthetic) using real-time spectral audio analysis. 
 
 The application features a highly interactive holographic/cyberpunk dashboard with fluid canvas-based animations, real-time microphone WebSockets streaming, and multi-instrument diagnostics.
 
