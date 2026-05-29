@@ -18,10 +18,10 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
   const centroidPercent = Math.min(100, (centroid / 5000) * 100);
 
   return (
-    <div className="editorial-panel p-6 rounded border border-white/5 bg-black/25 relative overflow-hidden flex flex-col h-full">
-      <div className="flex items-center gap-2 mb-5">
-        <Cpu className="w-4 h-4 text-white/60" />
-        <h2 className="text-xs font-mono font-bold text-white/80 uppercase tracking-widest">
+    <div className="editorial-panel p-6 relative overflow-hidden flex flex-col h-full">
+      <div className="flex items-center gap-2.5 mb-5">
+        <Cpu className="w-4 h-4 text-slate-500" />
+        <h2 className="text-sm font-mono font-bold text-[#0f172a] uppercase tracking-widest">
           telemetry.signal.readouts
         </h2>
       </div>
@@ -31,15 +31,15 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
         <div className="space-y-4">
           {/* RMS Volume */}
           <div>
-            <div className="flex justify-between text-[10px] font-mono mb-1.5">
-              <span className="text-white/40 flex items-center gap-1.5">
-                <Volume2 className="w-3 h-3" /> volume.rms
+            <div className="flex justify-between text-xs font-mono mb-1.5">
+              <span className="text-slate-500 flex items-center gap-1.5">
+                <Volume2 className="w-3.5 h-3.5" /> volume.rms
               </span>
-              <span className="text-white font-bold font-mono">{(rms * 100).toFixed(1)}%</span>
+              <span className="text-[#0f172a] font-bold font-mono">{(rms * 100).toFixed(1)}%</span>
             </div>
-            <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
+            <div className="h-[2px] w-full bg-slate-100 rounded overflow-hidden">
               <div 
-                className="h-full bg-[#ff5d3b] transition-all duration-200"
+                className="h-full bg-[#e11d48] transition-all duration-200"
                 style={{ width: `${volumePercent}%` }}
               ></div>
             </div>
@@ -47,17 +47,17 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
 
           {/* Pitch */}
           <div>
-            <div className="flex justify-between text-[10px] font-mono mb-1.5">
-              <span className="text-white/40 flex items-center gap-1.5">
-                <Zap className="w-3 h-3" /> pitch.f0
+            <div className="flex justify-between text-xs font-mono mb-1.5">
+              <span className="text-slate-500 flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5" /> pitch.f0
               </span>
-              <span className="text-white font-bold font-mono">
+              <span className="text-[#0f172a] font-bold font-mono">
                 {pitch > 0 ? `${pitch.toFixed(0)} hz` : 'unvoiced'}
               </span>
             </div>
-            <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
+            <div className="h-[2px] w-full bg-slate-100 rounded overflow-hidden">
               <div 
-                className="h-full bg-[#ff5d3b] transition-all duration-200"
+                className="h-full bg-[#e11d48] transition-all duration-200"
                 style={{ width: `${pitchPercent}%` }}
               ></div>
             </div>
@@ -65,15 +65,15 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
 
           {/* Zero Crossing Rate */}
           <div>
-            <div className="flex justify-between text-[10px] font-mono mb-1.5">
-              <span className="text-white/40 flex items-center gap-1.5">
-                <Radio className="w-3 h-3" /> crossings.zcr
+            <div className="flex justify-between text-xs font-mono mb-1.5">
+              <span className="text-slate-500 flex items-center gap-1.5">
+                <Radio className="w-3.5 h-3.5" /> crossings.zcr
               </span>
-              <span className="text-white font-bold font-mono">{zcr.toFixed(4)}</span>
+              <span className="text-[#0f172a] font-bold font-mono">{zcr.toFixed(4)}</span>
             </div>
-            <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
+            <div className="h-[2px] w-full bg-slate-100 rounded overflow-hidden">
               <div 
-                className="h-full bg-[#ff5d3b] transition-all duration-200"
+                className="h-full bg-[#e11d48] transition-all duration-200"
                 style={{ width: `${zcrPercent}%` }}
               ></div>
             </div>
@@ -81,15 +81,15 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
 
           {/* Spectral Centroid */}
           <div>
-            <div className="flex justify-between text-[10px] font-mono mb-1.5">
-              <span className="text-white/40 flex items-center gap-1.5">
-                <TrendingUp className="w-3 h-3" /> centroid.brightness
+            <div className="flex justify-between text-xs font-mono mb-1.5">
+              <span className="text-slate-500 flex items-center gap-1.5">
+                <TrendingUp className="w-3.5 h-3.5" /> centroid.brightness
               </span>
-              <span className="text-white font-bold font-mono">{Math.round(centroid)} hz</span>
+              <span className="text-[#0f172a] font-bold font-mono">{Math.round(centroid)} hz</span>
             </div>
-            <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
+            <div className="h-[2px] w-full bg-slate-100 rounded overflow-hidden">
               <div 
-                className="h-full bg-[#ff5d3b] transition-all duration-200"
+                className="h-full bg-[#e11d48] transition-all duration-200"
                 style={{ width: `${centroidPercent}%` }}
               ></div>
             </div>
@@ -98,58 +98,58 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
 
         {/* Right: Technical Log columns */}
         <div className="flex flex-col justify-between space-y-4">
-          <div className="bg-black/40 p-3.5 rounded border border-white/5 text-[10px] font-mono space-y-2">
-            <div className="flex justify-between border-b border-white/5 pb-1">
-              <span className="text-white/35">samplerate</span>
-              <span className="text-white/70">{sampleRate} hz</span>
+          <div className="bg-slate-50/50 p-3.5 rounded border border-slate-100 text-xs font-mono space-y-2">
+            <div className="flex justify-between border-b border-slate-100 pb-1.5">
+              <span className="text-slate-500">samplerate</span>
+              <span className="text-slate-800 font-semibold">{sampleRate} hz</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-1">
-              <span className="text-white/35">track.length</span>
-              <span className="text-white/70">{duration.toFixed(2)}s</span>
+            <div className="flex justify-between border-b border-slate-100 pb-1.5">
+              <span className="text-slate-500">track.length</span>
+              <span className="text-slate-800 font-semibold">{duration.toFixed(2)}s</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-1">
-              <span className="text-white/35">pitch.deviation</span>
-              <span className="text-white/70">{pitchVar.toFixed(1)} hz</span>
+            <div className="flex justify-between border-b border-slate-100 pb-1.5">
+              <span className="text-slate-500">pitch.deviation</span>
+              <span className="text-slate-800 font-semibold">{pitchVar.toFixed(1)} hz</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-1">
-              <span className="text-white/35">flatness.index</span>
-              <span className="text-white/70">{flatness.toFixed(5)}</span>
+            <div className="flex justify-between border-b border-slate-100 pb-1.5">
+              <span className="text-slate-500">flatness.index</span>
+              <span className="text-slate-800 font-semibold">{flatness.toFixed(5)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-white/35">highfreq.ratio</span>
-              <span className="text-white/70">{(highFreqRatio * 100).toFixed(1)}%</span>
+              <span className="text-slate-500">highfreq.ratio</span>
+              <span className="text-slate-800 font-semibold">{(highFreqRatio * 100).toFixed(1)}%</span>
             </div>
           </div>
 
           {/* Flags Bulletin */}
-          <div className="space-y-1.5">
-            <h3 className="text-[9px] font-mono font-bold text-white/40 uppercase tracking-wider">
+          <div className="space-y-2">
+            <h3 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
               anomaly.status.bulletin
             </h3>
             
             {flags ? (
-              <div className="space-y-1 font-mono text-[9px]">
+              <div className="space-y-1 font-mono text-xs">
                 {flags.robotic_flat_pitch && (
-                  <div className="text-[#ff5d3b]">• flat pitch envelope detected (robotic)</div>
+                  <div className="text-[#e11d48]">• flat pitch envelope detected (robotic)</div>
                 )}
                 {flags.pitch_jitter_anomaly && (
-                  <div className="text-[#ff5d3b]">• pitch jitter anomaly active (glitch)</div>
+                  <div className="text-[#e11d48]">• pitch jitter anomaly active (glitch)</div>
                 )}
                 {flags.high_freq_flatness && (
-                  <div className="text-[#ff5d3b]">• spectral flare active (vocoder buzz)</div>
+                  <div className="text-[#e11d48]">• spectral flare active (vocoder buzz)</div>
                 )}
                 {flags.oversmoothed_mel_envelope && (
-                  <div className="text-[#ff5d3b]">• oversmoothed mel envelope (synthetic)</div>
+                  <div className="text-[#e11d48]">• oversmoothed mel envelope (synthetic)</div>
                 )}
                 {flags.anomalous_centroid && (
-                  <div className="text-white/50">• anomalous centroid center</div>
+                  <div className="text-slate-500">• anomalous centroid center</div>
                 )}
                 {!flags.robotic_flat_pitch && !flags.pitch_jitter_anomaly && !flags.high_freq_flatness && !flags.oversmoothed_mel_envelope && (
-                  <div className="text-emerald-400/80">• all spectral features nominal (organic)</div>
+                  <div className="text-emerald-600">• all spectral features nominal (organic)</div>
                 )}
               </div>
             ) : (
-              <div className="text-[9px] text-white/30 italic bg-black/20 p-2 rounded border border-white/5 text-center font-mono">
+              <div className="text-xs text-slate-400 italic bg-slate-50 p-2 rounded border border-slate-100 text-center font-mono">
                 awaiting active signal stream...
               </div>
             )}

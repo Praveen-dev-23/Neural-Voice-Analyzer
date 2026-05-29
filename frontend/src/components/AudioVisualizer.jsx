@@ -107,7 +107,7 @@ const AudioVisualizer = ({
 
           // Glowing peak markers
           if (barHeight > 5) {
-            ctx.fillStyle = 'rgba(255, 93, 59, 0.9)'; // Soft orange accent
+            ctx.fillStyle = 'rgba(225, 29, 72, 0.95)'; // Soft red accent
             ctx.fillRect(x, H - barHeight - 2, barWidth - 3, 1.5);
           }
 
@@ -180,7 +180,7 @@ const AudioVisualizer = ({
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('CORE RADIAL', centerX, centerY - 5);
-        ctx.fillStyle = 'rgba(255, 93, 59, 0.85)';
+        ctx.fillStyle = 'rgba(225, 29, 72, 0.85)';
         ctx.fillText(`${Math.round(avgFreq)} db`, centerX, centerY + 8);
       }
 
@@ -216,19 +216,19 @@ const AudioVisualizer = ({
             const val = frame[yBin];
             const normVal = val / 255;
 
-            // Redesigned Copper-to-Orange-to-White Palette
+            // Redesigned Red-to-White Palette
             let color;
             if (normVal < 0.08) {
               color = `rgba(8, 8, 10, ${normVal * 12})`;
             } else if (normVal < 0.45) {
               const p = (normVal - 0.08) / 0.37;
-              color = `rgb(${Math.floor(8 + p * 90)}, ${Math.floor(8 + p * 25)}, ${Math.floor(10 + p * 10)})`; // Copper red/brown
+              color = `rgb(${Math.floor(8 + p * 80)}, ${Math.floor(8 + p * 12)}, ${Math.floor(10 + p * 15)})`; // Dark crimson
             } else if (normVal < 0.85) {
               const p = (normVal - 0.45) / 0.4;
-              color = `rgb(${Math.floor(98 + p * 157)}, ${Math.floor(33 + p * 60)}, ${Math.floor(20 + p * 39)})`; // Neon orange-coral
+              color = `rgb(${Math.floor(88 + p * 137)}, ${Math.floor(20 + p * 9)}, ${Math.floor(25 + p * 47)})`; // Cyberpunk Red
             } else {
               const p = (normVal - 0.85) / 0.15;
-              color = `rgb(255, ${Math.floor(93 + p * 162)}, ${Math.floor(59 + p * 196)})`; // Orange to white
+              color = `rgb(225, ${Math.floor(29 + p * 226)}, ${Math.floor(72 + p * 183)})`; // Red to white-pink
             }
 
             ctx.fillStyle = color;
@@ -274,13 +274,13 @@ const AudioVisualizer = ({
             color = `rgba(8, 8, 10, ${normVal * 12})`;
           } else if (normVal < 0.45) {
             const p = (normVal - 0.08) / 0.37;
-            color = `rgb(${Math.floor(8 + p * 90)}, ${Math.floor(8 + p * 25)}, ${Math.floor(10 + p * 10)})`;
+            color = `rgb(${Math.floor(8 + p * 80)}, ${Math.floor(8 + p * 12)}, ${Math.floor(10 + p * 15)})`;
           } else if (normVal < 0.85) {
             const p = (normVal - 0.45) / 0.4;
-            color = `rgb(${Math.floor(98 + p * 157)}, ${Math.floor(33 + p * 60)}, ${Math.floor(20 + p * 39)})`;
+            color = `rgb(${Math.floor(88 + p * 137)}, ${Math.floor(20 + p * 9)}, ${Math.floor(25 + p * 47)})`;
           } else {
             const p = (normVal - 0.85) / 0.15;
-            color = `rgb(255, ${Math.floor(93 + p * 162)}, ${Math.floor(59 + p * 196)})`;
+            color = `rgb(225, ${Math.floor(29 + p * 226)}, ${Math.floor(72 + p * 183)})`;
           }
 
           ctx.fillStyle = color;

@@ -14,27 +14,27 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
   const isAI = prediction?.toLowerCase().includes('ai') ?? false;
   const hasPrediction = !!prediction;
 
-  let accentColor = '#d3e9e8'; // pale teal
-  let textClass = 'text-white';
-  let indicatorGlow = 'rgba(211, 233, 232, 0.05)';
+  let accentColor = '#64748b'; // slate grey standby
+  let textClass = 'text-[#0f172a]';
+  let indicatorGlow = 'rgba(100, 116, 139, 0.03)';
 
   if (hasPrediction) {
     if (isAI) {
-      accentColor = '#ff5d3b'; // Orange Coral
-      textClass = 'text-[#ff5d3b] text-glow-orange';
-      indicatorGlow = 'rgba(255, 93, 59, 0.12)';
+      accentColor = '#e11d48'; // Cyber Red
+      textClass = 'text-[#e11d48] text-glow-red font-bold';
+      indicatorGlow = 'rgba(225, 29, 72, 0.06)';
     } else {
-      accentColor = '#d3e9e8'; // Pale slate teal
-      textClass = 'text-[#d3e9e8] text-glow-white';
-      indicatorGlow = 'rgba(211, 233, 232, 0.1)';
+      accentColor = '#0f766e'; // Teal/emerald organic accent
+      textClass = 'text-[#0f766e] font-bold';
+      indicatorGlow = 'rgba(15, 118, 110, 0.05)';
     }
   }
 
   return (
-    <div className="editorial-panel p-6 rounded border border-white/5 bg-black/25 relative overflow-hidden flex flex-col h-full">
-      <div className="flex items-center gap-2 mb-5">
-        <Cpu className="w-4 h-4 text-white/60 animate-pulse" />
-        <h2 className="text-xs font-mono font-bold text-white/80 uppercase tracking-widest">
+    <div className="editorial-panel p-6 relative overflow-hidden flex flex-col h-full">
+      <div className="flex items-center gap-2.5 mb-5">
+        <Cpu className="w-4 h-4 text-slate-500 animate-pulse" />
+        <h2 className="text-sm font-mono font-bold text-[#0f172a] uppercase tracking-widest">
           ml.model.classification
         </h2>
       </div>
@@ -44,11 +44,11 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
           /* Processing State */
           <div className="flex flex-col items-center justify-center text-center space-y-4">
             <div className="relative w-20 h-20">
-              <div className="absolute inset-0 border border-white/5 rounded-full"></div>
-              <div className="absolute inset-0 border-t border-b border-white rounded-full animate-spin"></div>
+              <div className="absolute inset-0 border border-slate-100 rounded-full"></div>
+              <div className="absolute inset-0 border-t border-b border-[#e11d48] rounded-full animate-spin"></div>
             </div>
             <div>
-              <p className="text-[10px] font-mono text-white/60 uppercase tracking-widest animate-pulse">
+              <p className="text-xs font-mono text-slate-600 uppercase tracking-widest animate-pulse">
                 decryption.matrix.running
               </p>
             </div>
@@ -63,8 +63,8 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
                   cx="64"
                   cy="64"
                   r={radius}
-                  className="stroke-white/5 fill-transparent"
-                  strokeWidth="2"
+                  className="stroke-slate-100 fill-transparent"
+                  strokeWidth="2.5"
                 />
                 <circle
                   cx="64"
@@ -72,7 +72,7 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
                   r={radius}
                   className="fill-transparent transition-all duration-700 ease-out"
                   stroke={accentColor}
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeDasharray={circumference}
                   strokeDashoffset={strokeDashoffset}
                   strokeLinecap="round"
@@ -80,10 +80,10 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
               </svg>
               {/* Circular gauge text */}
               <div className="absolute flex flex-col items-center justify-center text-center">
-                <span className="text-[8px] font-mono text-white/40 uppercase tracking-widest">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
                   accuracy
                 </span>
-                <span className="text-xl font-bold font-mono text-white">
+                <span className="text-2xl font-bold font-mono text-[#0f172a]">
                   {confidence.toFixed(1)}%
                 </span>
               </div>
@@ -96,25 +96,25 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
 
             {/* Verdict Callout */}
             <div className="text-center w-full">
-              <span className="text-[8px] font-mono text-white/35 uppercase tracking-widest block mb-1">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block mb-1">
                 diagnosis.verdict
               </span>
-              <h3 className={`text-xl font-serif italic font-bold leading-tight ${textClass}`}>
+              <h3 className={`text-2xl font-serif italic font-bold leading-tight ${textClass}`}>
                 {prediction}
               </h3>
             </div>
 
             {/* Split probabilities */}
-            <div className="w-full grid grid-cols-2 gap-3 text-[10px] font-mono border-t border-white/5 pt-3.5">
+            <div className="w-full grid grid-cols-2 gap-3 text-xs font-mono border-t border-slate-100 pt-3.5">
               <div className="flex flex-col justify-between">
-                <span className="text-white/35">human.split</span>
-                <span className="text-white font-bold mt-1">
+                <span className="text-slate-500">human.split</span>
+                <span className="text-[#0f172a] font-bold mt-1 text-sm">
                   {(probabilities.human * 100).toFixed(1)}%
                 </span>
               </div>
-              <div className="flex flex-col justify-between border-l border-white/5 pl-3">
-                <span className="text-white/35">synthetic.split</span>
-                <span className="text-white font-bold mt-1">
+              <div className="flex flex-col justify-between border-l border-slate-100 pl-3">
+                <span className="text-slate-500">synthetic.split</span>
+                <span className="text-[#0f172a] font-bold mt-1 text-sm">
                   {(probabilities.ai * 100).toFixed(1)}%
                 </span>
               </div>
@@ -122,13 +122,13 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
 
             {/* Anomaly score indicator */}
             <div className="w-full">
-              <div className="flex justify-between text-[9px] font-mono mb-1.5">
-                <span className="text-white/35 uppercase">anomaly.index</span>
-                <span className="text-white/70 font-mono">
+              <div className="flex justify-between text-xs font-mono mb-1.5">
+                <span className="text-slate-500 uppercase">anomaly.index</span>
+                <span className="text-slate-700 font-mono font-bold">
                   {anomalyScore.toFixed(3)}
                 </span>
               </div>
-              <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
+              <div className="h-[2px] w-full bg-slate-100 rounded overflow-hidden">
                 <div 
                   className="h-full transition-all duration-300"
                   style={{ width: `${anomalyScore * 100}%`, backgroundColor: accentColor }}
@@ -140,13 +140,13 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
         ) : (
           /* Standby State */
           <div className="flex flex-col items-center justify-center text-center p-4">
-            <div className="w-12 h-12 rounded-full border border-dashed border-white/15 flex items-center justify-center mb-3 animate-pulse">
-              <span className="text-white/20 text-xs font-mono">io</span>
+            <div className="w-12 h-12 rounded-full border border-dashed border-slate-200 flex items-center justify-center mb-3 animate-pulse">
+              <span className="text-slate-400 text-xs font-mono">io</span>
             </div>
-            <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+            <p className="text-xs font-mono text-slate-500 uppercase tracking-widest font-bold">
               awaiting.signal.ingest
             </p>
-            <p className="text-[9px] text-white/20 mt-1.5 max-w-[180px] uppercase font-mono">
+            <p className="text-[10px] text-slate-400 mt-1.5 max-w-[200px] uppercase font-mono">
               activate scan core to invoke neural processing
             </p>
           </div>

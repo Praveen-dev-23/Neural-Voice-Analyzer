@@ -550,7 +550,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#08080a] text-[#f8fafc] select-none relative font-sans">
+    <div className="min-h-screen bg-[#f8f8fa] text-[#0f172a] select-none relative font-sans">
       {/* Cinematic Awwwards Filters */}
       <div className="bg-grain"></div>
       <div ref={backlightRef} className="bg-backlight"></div>
@@ -564,7 +564,7 @@ function App() {
       {/* Lagging Cursor */}
       <div ref={cursorRef} className="custom-cursor hidden md:flex items-center justify-center">
         {cursorText && (
-          <span className="text-[8px] font-mono tracking-widest text-white uppercase text-center select-none pointer-events-none animate-pulse">
+          <span className="text-[8px] font-mono tracking-widest text-[#0f172a] uppercase text-center select-none pointer-events-none animate-pulse">
             {cursorText}
           </span>
         )}
@@ -572,22 +572,20 @@ function App() {
       <div ref={cursorDotRef} className={`custom-cursor-dot hidden md:block ${cursorText ? 'opacity-0 scale-50' : 'opacity-100'}`}></div>
 
       {/* Editorial Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#08080a]/90 backdrop-blur-md px-6 py-4 flex items-center justify-between text-[11px] font-mono tracking-widest text-white/50 uppercase">
+      <nav className="fixed top-0 left-0 w-full z-50 border-b border-black/5 bg-[#f8f8fa]/80 backdrop-blur-md px-6 py-4 flex items-center justify-between text-xs md:text-sm font-mono tracking-widest text-[#0f172a]/70 uppercase">
         <div className="flex items-center gap-2">
-          <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-full flex items-center gap-2 font-bold text-white text-[10px] tracking-widest lowercase">
-            <span className="text-[#ff5d3b] text-xs">✶</span> spectra.network
+          <div className="bg-black/5 border border-black/10 px-4 py-1.5 rounded-full flex items-center gap-2 font-bold text-black text-xs tracking-widest lowercase">
+            <span className="text-[#e11d48] text-xs">✶</span> spectra.network
           </div>
         </div>
         
-        <div className="hidden sm:flex items-center gap-8 text-[10px] lowercase font-sans font-medium tracking-normal text-white/60">
-          <a href="#about-section" data-cursor="science" className="hover:text-white transition-colors cursor-none">about</a>
-          <button onClick={handleScrollToConsole} data-cursor="scan" className="hover:text-white transition-colors cursor-none">scanner</button>
-          <a href="#tech-section" data-cursor="matrix" className="hover:text-white transition-colors cursor-none">technology</a>
-          <a href="#" className="hover:text-white transition-colors cursor-none">documentation</a>
+        <div className="hidden sm:flex items-center gap-8 text-xs md:text-sm lowercase font-sans font-medium tracking-normal text-black/75">
+          <button onClick={handleScrollToConsole} data-cursor="scan" className="hover:text-black transition-colors cursor-none font-bold">scanner</button>
+          <a href="#" className="hover:text-black transition-colors cursor-none">documentation</a>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="hidden md:inline text-[9px] text-white/30 uppercase tracking-widest font-mono">
+          <span className="hidden md:inline text-xs text-[#0f172a]/50 uppercase tracking-widest font-mono">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' })}
           </span>
           <button 
@@ -596,289 +594,33 @@ function App() {
             onMouseMove={(e) => handleMagneticMove(e, btnResetRef)}
             onMouseLeave={() => handleMagneticLeave(btnResetRef)}
             data-cursor="clear"
-            className="text-white hover:text-black hover:bg-white transition-all border border-white/15 px-3 py-1 rounded-full cursor-none text-[10px] font-sans font-medium tracking-wide magnetic-target"
+            className="text-black hover:text-white hover:bg-black transition-all border border-black/15 px-4 py-1.5 rounded-full cursor-none text-xs font-sans font-semibold tracking-wide magnetic-target"
           >
             reset console →
           </button>
         </div>
       </nav>
 
-      {/* 1. CINEMATIC HERO SECTION */}
-      <section className="relative min-h-screen flex flex-col justify-between pt-36 pb-12 px-6 md:px-12 overflow-hidden">
-        
-        {/* Concentric Radar Layout Background */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none hero-camera-effect">
-          <div className="radar-bg-container">
-            {/* Concentric rings */}
-            <div className="radar-ring" style={{ width: '180px', height: '180px' }}></div>
-            <div className="radar-ring" style={{ width: '320px', height: '320px' }}></div>
-            <div className="radar-ring" style={{ width: '480px', height: '480px' }}></div>
-            <div className="radar-ring-dashed" style={{ width: '640px', height: '640px' }}></div>
-            <div className="radar-ring" style={{ width: '800px', height: '800px' }}></div>
-
-            {/* Sweep arm */}
-            <div className="radar-sweep-arm"></div>
-            
-            {/* Glowing active core sphere */}
-            <div className="radar-glow-sphere"></div>
-            
-            {/* Central node text block */}
-            <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[240px] text-center z-10 flex flex-col items-center justify-center p-4">
-              <span className="text-[7px] font-mono text-white/30 uppercase tracking-widest mb-1.5">
-                [ ingestion.state.core ]
-              </span>
-              <p className="text-[10px] font-sans text-white/70 leading-relaxed max-w-[200px]">
-                {isRecording ? 'Listening to stream signals in real time...' : isProcessing ? 'Extracting log-mel feature maps...' : 'AI-powered neural models classify speech signatures.'}
-              </p>
-              
-              {/* Dynamic waveform pulse */}
-              <div className="flex gap-1 items-center justify-center mt-3 h-4">
-                {[...Array(8)].map((_, i) => (
-                  <span 
-                    key={i} 
-                    className={`w-[1.5px] rounded bg-[#ff5d3b] transition-all`}
-                    style={{ 
-                      height: isRecording ? `${Math.floor(Math.random() * 16) + 4}px` : isProcessing ? '8px' : '3px',
-                      animation: isRecording || isProcessing ? `scanning 1.5s ease-in-out infinite alternate` : 'none',
-                      animationDelay: `${i * 0.08}s`
-                    }}
-                  ></span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero headline overlapping the radar circles */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-center text-center max-w-5xl mx-auto w-full">
-          <div className="space-y-6">
-            <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">
-              [ global.neural.voice.auditor ]
-            </span>
-            
-            <h1 className="text-huge font-sans font-medium text-white tracking-tight max-w-4xl mx-auto">
-              Next level of <span className="text-[#ff5d3b] italic font-serif">⚡️ voice analysis</span> <br className="hidden md:block"/> and <span className="text-[#ff5d3b] italic font-serif">✶ deepfake</span> detection
-            </h1>
-          </div>
-        </div>
-
-        {/* Stats and metadata overlay (absolute layout flanking left and right) */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-6 md:left-12 z-10 hidden lg:flex flex-col gap-12 font-sans select-none pointer-events-none text-left">
-          <div className="space-y-1">
-            <div className="text-2xl font-medium text-white tracking-tight">99.4%</div>
-            <div className="text-[9px] font-mono uppercase text-white/45 tracking-wider">Classifier Accuracy</div>
-          </div>
-          <div className="space-y-1">
-            <div className="text-2xl font-medium text-white tracking-tight">0.01s</div>
-            <div className="text-[9px] font-mono uppercase text-white/45 tracking-wider">Ingestion Latency</div>
-          </div>
-        </div>
-
-        <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-12 z-10 hidden lg:flex flex-col gap-12 font-sans select-none pointer-events-none text-right">
-          <div className="space-y-1">
-            <div className="text-2xl font-medium text-white tracking-tight">10k+</div>
-            <div className="text-[9px] font-mono uppercase text-white/45 tracking-wider">Voices Analyzed</div>
-          </div>
-          <div className="space-y-1">
-            <div className="text-2xl font-medium text-white tracking-tight">50+</div>
-            <div className="text-[9px] font-mono uppercase text-white/45 tracking-wider">Formats Supported</div>
-          </div>
-        </div>
-
-        {/* Hero Footer: Carousel pills from reference */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 w-full mt-auto">
-          {/* Badge 1 */}
-          <div className="flex items-center gap-1.5 bg-black/40 border border-white/5 rounded-full px-4 py-2 text-[10px] font-sans">
-            <span className="w-4 h-4 rounded-full bg-[#ff5d3b] text-white flex items-center justify-center text-[8px] font-bold">1</span>
-            <span className="w-2 h-2 rounded-full border border-white/20"></span>
-            <span className="w-2 h-2 rounded-full border border-white/20"></span>
-          </div>
-
-          {/* Badge 2 (Wide Orange Pill) */}
-          <div className="flex-1 max-w-xl bg-[#ff5d3b] rounded-full px-5 py-2.5 flex items-center justify-between gap-4 text-white hover:opacity-95 transition-opacity">
-            <div className="flex items-center gap-1.5 text-[9px] font-bold">
-              <span className="w-4 h-4 rounded-full bg-white/20 text-white flex items-center justify-center">1</span>
-              <span className="w-4 h-4 rounded-full bg-black text-white flex items-center justify-center">2</span>
-              <span className="w-4 h-4 rounded-full bg-white/20 text-white flex items-center justify-center">3</span>
-            </div>
-            <p className="text-[10px] font-sans font-medium truncate flex-1 pl-2 text-center md:text-left">
-              Real-time log-mel feature extraction isolates digital vocoder signatures automatically!
-            </p>
-            <span className="text-xs">↗</span>
-          </div>
-
-          {/* Badge 3 */}
-          <div className="flex items-center gap-3 bg-black/40 border border-white/5 rounded-full px-4 py-2">
-            <div className="flex items-center gap-1.5 text-[9px] font-sans text-white/55">
-              <span className="w-2.5 h-2.5 rounded-full border border-white/20"></span>
-              <span className="w-2.5 h-2.5 rounded-full border border-white/20"></span>
-              <span className="w-4 h-4 rounded-full bg-[#ff5d3b] text-white flex items-center justify-center font-bold text-[8px]">3</span>
-            </div>
-            {/* User Avatars */}
-            <div className="flex -space-x-1.5 items-center">
-              <div className="w-4 h-4 rounded-full bg-[#e2f1f0] border border-black text-[7px] text-black font-bold flex items-center justify-center">A</div>
-              <div className="w-4 h-4 rounded-full bg-[#ff5d3b] border border-black text-[7px] text-white font-bold flex items-center justify-center">B</div>
-              <div className="w-4 h-4 rounded-full bg-zinc-700 border border-black text-[7px] text-white font-bold flex items-center justify-center">C</div>
-            </div>
-            <span className="text-white/60 text-[9px]">↗</span>
-          </div>
-        </div>
-
-      </section>
-
-      {/* 2. STORYTELLING / ACOUSTIC SCIENCE (SECTION 01) */}
-      <section id="about-section" className="py-28 px-6 md:px-12 border-t border-white/5 relative overflow-hidden scroll-reveal-panel">
-        <div className="max-w-7xl mx-auto space-y-14">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">01 /</span>
-            <span className="badge-pill-teal">About ✶ Spectra</span>
-          </div>
-
-          <div className="text-2xl md:text-4xl font-sans font-normal text-white leading-relaxed max-w-5xl">
-            Our analyzer <span className="badge-pill-orange"><span className="text-[8px] leading-none">+</span></span> has been exposing 
-            <span className="badge-pill-dark">⚡️ vocoder buzz</span> and artificial voice models for 
-            <span className="badge-pill-orange">✶ Spectra</span> 5 years. A database of 
-            <span className="badge-pill-dark">10,000+</span> voice profiles.
-          </div>
-
-          {/* Three Feature Cards Grid matching the mock style exactly */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-            {/* Card 1: Constant monitoring */}
-            <div className="feature-card-editorial">
-              <div className="space-y-4">
-                {/* Illustration panel */}
-                <div className="h-[200px] bg-black/5 border border-black/5 rounded-[20px] flex items-center justify-center p-6 relative overflow-hidden">
-                  {/* SVG graphic of radar scanning */}
-                  <svg className="w-full h-full" viewBox="0 0 200 200">
-                    <circle cx="100" cy="100" r="80" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" fill="none" />
-                    <circle cx="100" cy="100" r="50" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" fill="none" />
-                    <circle cx="100" cy="100" r="20" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" fill="none" />
-                    {/* Scanning sweep */}
-                    <path d="M100 100 L170 60 A80 80 0 0 0 100 20 Z" fill="rgba(255, 93, 59, 0.1)" />
-                    <line x1="100" y1="100" x2="170" y2="60" stroke="#ff5d3b" strokeWidth="1.5" />
-                    <circle cx="170" cy="60" r="3" fill="#ff5d3b" />
-                    {/* Pill capsules inside svg */}
-                    <g transform="translate(15, 130)">
-                      <rect width="60" height="18" rx="4" fill="#ff5d3b" />
-                      <text x="30" y="12" fill="white" fontSize="8" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">domain</text>
-                    </g>
-                    <g transform="translate(85, 130)">
-                      <rect width="60" height="18" rx="4" fill="#ff5d3b" />
-                      <text x="30" y="12" fill="white" fontSize="8" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Website</text>
-                    </g>
-                    <g transform="translate(155, 130)">
-                      <rect width="30" height="18" rx="4" fill="rgba(15,23,42,0.06)" stroke="rgba(0,0,0,0.1)" />
-                      <text x="15" y="12" fill="black" fontSize="8" fontFamily="sans-serif" textAnchor="middle">app</text>
-                    </g>
-                  </svg>
-                </div>
-                
-                <h3 className="text-lg font-bold font-sans tracking-tight">Constant monitoring</h3>
-              </div>
-              <p className="text-[11px] font-sans text-slate-600 mt-6 leading-relaxed">
-                Monitor domains, websites, app stores, and other digital streams in real time.
-              </p>
-            </div>
-
-            {/* Card 2: AI-based detection */}
-            <div className="feature-card-editorial relative">
-              {/* Float share-it orange pill */}
-              <div className="absolute top-6 right-6 bg-[#ff5d3b] text-white text-[9px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-                SHARE IT <span className="text-[10px]">↗</span>
-              </div>
-
-              <div className="space-y-4">
-                {/* Illustration panel */}
-                <div className="h-[200px] bg-black/5 border border-black/5 rounded-[20px] flex items-center justify-center p-6 relative overflow-hidden">
-                  {/* SVG graphic of detective fedora and asterisk */}
-                  <div className="flex flex-col items-center justify-center space-y-4">
-                    <svg className="w-16 h-12 text-slate-800" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Hat crown */}
-                      <path d="M30 42 C30 20 40 18 50 18 C60 18 70 20 70 42 Z" fill="rgba(15, 23, 42, 0.2)" stroke="currentColor" strokeWidth="1.2" />
-                      {/* Hat band */}
-                      <path d="M30 38 H70 V42 H30 Z" fill="#ff5d3b" />
-                      {/* Hat brim */}
-                      <path d="M15 45 C35 41 65 41 85 45 C80 49 20 49 15 45 Z" fill="rgba(15, 23, 42, 0.3)" stroke="currentColor" strokeWidth="1.2" />
-                    </svg>
-                    {/* Asterisk */}
-                    <span className="text-[#ff5d3b] text-2xl font-bold select-none leading-none">✶</span>
-                    {/* Verdict pill */}
-                    <div className="border border-red-200 bg-red-50 text-red-500 font-bold text-[8px] px-3 py-0.5 rounded-full uppercase tracking-wider">
-                      Scam detected!
-                    </div>
-                  </div>
-                </div>
-                
-                <h3 className="text-lg font-bold font-sans tracking-tight">AI-based detection</h3>
-              </div>
-              <p className="text-[11px] font-sans text-slate-655 mt-6 leading-relaxed">
-                Out of the box detection for phishing, brand infringement, scams, and typosquat attacks.
-              </p>
-            </div>
-
-            {/* Card 3: Automatic triage */}
-            <div className="feature-card-editorial">
-              <div className="space-y-4">
-                {/* Illustration panel */}
-                <div className="h-[200px] bg-black/5 border border-black/5 rounded-[20px] flex items-center justify-center p-6 relative overflow-hidden">
-                  {/* SVG graphic of rotating stamp and threat capsules */}
-                  <svg className="w-full h-full" viewBox="0 0 200 200">
-                    {/* Rotating stamp circle in background */}
-                    <g transform="translate(100, 70)" className="animate-spin-slow origin-center">
-                      <circle cx="0" cy="0" r="40" stroke="rgba(15, 23, 42, 0.08)" strokeDasharray="3,3" strokeWidth="1.5" fill="none" />
-                      <text x="0" y="-45" fill="rgba(15,23,42,0.3)" fontSize="5.5" fontFamily="monospace" textAnchor="middle">✶ THREAT NEUTRALIZER ✶</text>
-                      <text x="0" y="48" fill="rgba(15,23,42,0.3)" fontSize="5.5" fontFamily="monospace" textAnchor="middle">✶ THREAT NEUTRALIZER ✶</text>
-                    </g>
-                    {/* Star inside circle */}
-                    <circle cx="100" cy="70" r="16" fill="rgba(255, 93, 59, 0.05)" />
-                    <text x="100" y="76" fill="#ff5d3b" fontSize="20" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">✶</text>
-
-                    {/* Piled threat pills */}
-                    <g transform="translate(30, 135) rotate(-10)">
-                      <rect width="45" height="16" rx="8" fill="rgba(15, 23, 42, 0.12)" />
-                      <text x="22.5" y="11" fill="black" fontSize="7" fontFamily="sans-serif" textAnchor="middle">Threat</text>
-                    </g>
-                    <g transform="translate(85, 140) rotate(5)">
-                      <rect width="45" height="16" rx="8" fill="rgba(15, 23, 42, 0.12)" />
-                      <text x="22.5" y="11" fill="black" fontSize="7" fontFamily="sans-serif" textAnchor="middle">Threat</text>
-                    </g>
-                    <g transform="translate(138, 132) rotate(-5)">
-                      <rect width="45" height="16" rx="8" fill="rgba(15, 23, 42, 0.12)" />
-                      <text x="22.5" y="11" fill="black" fontSize="7" fontFamily="sans-serif" textAnchor="middle">Threat</text>
-                    </g>
-                  </svg>
-                </div>
-                
-                <h3 className="text-lg font-bold font-sans tracking-tight">Automatic triage</h3>
-              </div>
-              <p className="text-[11px] font-sans text-slate-655 mt-6 leading-relaxed">
-                Neutralize threats without human intervention using automated spectral filtering.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Global Error Banner */}
       {errorMessage && (
-        <div className="mx-6 md:mx-12 bg-red-950/20 border border-red-500/20 text-red-400 p-4 rounded text-xs font-mono flex items-center gap-3 animate-shake">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
+        <div className="mx-6 md:mx-12 mt-28 bg-red-50 border border-red-200 text-red-600 p-5 rounded text-sm font-mono flex items-center gap-3 animate-shake">
+          <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
           <span>SYSTEM ERROR: {errorMessage}</span>
         </div>
       )}
 
       {/* 3. THE CORE DIAGNOSTIC CONSOLE (SCAN TARGETS) (SECTION 02) */}
-      <section id="spectra-console" className="py-24 px-6 md:px-12 border-t border-white/5 scroll-reveal-panel">
+      <section id="spectra-console" className={"pb-24 px-6 md:px-12 scroll-reveal-panel " + (errorMessage ? "pt-6" : "pt-32")}>
         <div className="max-w-7xl mx-auto space-y-12">
           
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/5 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-black/5 pb-6">
             <div>
-              <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">[ module.02 // scanner.console ]</span>
-              <h2 className="text-2xl font-serif italic text-white/90 mt-1">spectra.neural.decoder</h2>
+              <span className="text-xs font-mono text-black/50 uppercase tracking-widest">[ module.02 // scanner.console ]</span>
+              <h2 className="text-3xl font-serif italic text-black/95 mt-1">spectra.neural.decoder</h2>
             </div>
-            <div className="flex items-center gap-4 text-[10px] font-mono text-white/45">
-              <span>status // <span className="text-[#ff5d3b] animate-pulse">active.ingest</span></span>
+            <div className="flex items-center gap-4 text-xs font-mono text-black/65">
+              <span>status // <span className="text-[#e11d48] animate-pulse">active.ingest</span></span>
               <span>node // tokyo.dev</span>
             </div>
           </div>
@@ -889,10 +631,10 @@ function App() {
             {/* Left: Input Control Deck (Cols 1-4) */}
             <div className="lg:col-span-4 flex flex-col gap-6 justify-between">
               
-              <div className="editorial-panel p-6 rounded border border-white/5 bg-black/25 flex flex-col gap-5">
+              <div className="editorial-panel p-6 rounded border border-black/5 bg-white flex flex-col gap-5">
                 <div className="flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-white/50" />
-                  <h3 className="text-xs font-mono font-bold text-white/80 uppercase tracking-widest">
+                  <Layers className="w-4 h-4 text-black/50" />
+                  <h3 className="text-sm font-mono font-bold text-black/85 uppercase tracking-widest">
                     input.matrix.source
                   </h3>
                 </div>
@@ -907,9 +649,9 @@ function App() {
                         onMouseLeave={() => handleMagneticLeave(btnStartRef)}
                         onClick={startMicStreaming}
                         data-cursor="record"
-                        className="border border-white/10 hover:border-white/35 py-3.5 rounded text-[10px] font-mono uppercase tracking-widest text-[#ff5d3b] hover:bg-[#ff5d3b]/5 transition-all cursor-none magnetic-target flex items-center justify-center gap-2"
+                        className="border border-black/10 hover:border-black/30 py-4 rounded text-xs font-mono uppercase tracking-widest text-[#e11d48] hover:bg-[#e11d48]/5 transition-all cursor-none magnetic-target flex items-center justify-center gap-2 font-bold"
                       >
-                        <Mic className="w-3.5 h-3.5" /> start.rec
+                        <Mic className="w-4 h-4" /> start.rec
                       </button>
                     ) : (
                       <button
@@ -918,9 +660,9 @@ function App() {
                         onMouseLeave={() => handleMagneticLeave(btnStartRef)}
                         onClick={stopMicStreaming}
                         data-cursor="stop"
-                        className="border border-[#ff5d3b]/30 bg-[#ff5d3b]/5 hover:bg-[#ff5d3b]/10 py-3.5 rounded text-[10px] font-mono uppercase tracking-widest text-[#ff5d3b] transition-all cursor-none magnetic-target flex items-center justify-center gap-2"
+                        className="border border-[#e11d48]/30 bg-[#e11d48]/5 hover:bg-[#e11d48]/10 py-4 rounded text-xs font-mono uppercase tracking-widest text-[#e11d48] transition-all cursor-none magnetic-target flex items-center justify-center gap-2 font-bold"
                       >
-                        <MicOff className="w-3.5 h-3.5 animate-pulse" /> stop.rec
+                        <MicOff className="w-4 h-4 animate-pulse" /> stop.rec
                       </button>
                     )}
 
@@ -929,9 +671,9 @@ function App() {
                       onMouseMove={(e) => handleMagneticMove(e, btnUploadRef)}
                       onMouseLeave={() => handleMagneticLeave(btnUploadRef)}
                       data-cursor="upload"
-                      className="border border-white/10 hover:border-white/35 py-3.5 rounded text-[10px] font-mono uppercase tracking-widest text-white/80 hover:bg-white/5 transition-all cursor-none text-center block magnetic-target flex items-center justify-center gap-2"
+                      className="border border-black/10 hover:border-black/30 py-4 rounded text-xs font-mono uppercase tracking-widest text-black/80 hover:bg-black/5 transition-all cursor-none text-center block magnetic-target flex items-center justify-center gap-2 font-bold"
                     >
-                      <UploadCloud className="w-3.5 h-3.5" /> upload.wav
+                      <UploadCloud className="w-4 h-4" /> upload.wav
                       <input 
                         type="file" 
                         accept="audio/*" 
@@ -946,31 +688,31 @@ function App() {
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
                     data-cursor="drop file"
-                    className="border border-dashed border-white/10 rounded p-6 bg-black/40 hover:bg-white/2 hover:border-white/20 transition-all text-center group cursor-none"
+                    className="border border-dashed border-black/10 rounded p-6 bg-black/5 hover:bg-black/10 hover:border-[#e11d48]/35 transition-all text-center group cursor-none"
                   >
-                    <UploadCloud className="w-6 h-6 text-white/20 group-hover:text-white/50 transition-all mx-auto mb-2.5" />
-                    <p className="text-[9px] font-mono text-white/50 uppercase tracking-widest">
+                    <UploadCloud className="w-8 h-8 text-black/20 group-hover:text-[#e11d48] transition-all mx-auto mb-2.5" />
+                    <p className="text-xs font-mono text-[#0f172a]/70 uppercase tracking-widest font-bold">
                       drag.drop.scan.track
                     </p>
-                    <p className="text-[8px] text-white/25 mt-1 font-mono uppercase">
+                    <p className="text-[10px] text-[#0f172a]/50 mt-1 font-mono uppercase">
                       wav / mp3 / flac (max 10mb)
                     </p>
                   </div>
 
                   {/* Selected File Details */}
                   {activeFileName && (
-                    <div className="bg-black/80 p-3 rounded border border-white/5 flex items-center justify-between gap-3 text-[10px] font-mono">
+                    <div className="bg-black/5 p-3 rounded border border-black/5 flex items-center justify-between gap-3 text-xs font-mono">
                       <div className="truncate flex-1">
-                        <span className="text-white/20 uppercase text-[8px] block">scan.target</span>
-                        <span className="text-white/80 font-bold truncate block">{activeFileName}</span>
+                        <span className="text-black/40 uppercase text-[9px] block">scan.target</span>
+                        <span className="text-[#0f172a] font-bold truncate block">{activeFileName}</span>
                       </div>
                       
                       {fileUrl && (
                         <button
                           onClick={handlePlayPause}
-                          className={`p-2 rounded border ${isPlaying ? 'bg-white/10 border-white/20 text-white' : 'bg-black border-white/5 text-white/60'} hover:bg-white hover:text-black transition-all cursor-none`}
+                          className={"p-2 rounded border " + (isPlaying ? "bg-black/10 border-black/15 text-black" : "bg-white border-black/10 text-black/60") + " hover:bg-black hover:text-white transition-all cursor-none"}
                         >
-                          {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                         </button>
                       )}
                     </div>
@@ -1015,7 +757,7 @@ function App() {
       </section>
 
       {/* 4. DIAGNOSTICS & TELEMETRY */}
-      <section className="py-20 px-6 md:px-12 border-t border-white/5 bg-[#08080a]/40 scroll-reveal-panel">
+      <section className="py-20 px-6 md:px-12 border-t border-black/5 bg-[#f8f8fa]/60 scroll-reveal-panel">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Diagnostics details */}
@@ -1035,120 +777,20 @@ function App() {
         </div>
       </section>
 
-      {/* 5. NETWORKS / INTEGRATIONS CIRCLES (SECTION 03) */}
-      <section id="networks-section" className="py-28 px-6 md:px-12 border-t border-white/5 relative overflow-hidden scroll-reveal-panel">
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">03 /</span>
-            <span className="badge-pill-teal">Investors of ✶ Network</span>
-          </div>
-          
-          <h2 className="text-2xl md:text-3xl font-sans font-normal text-white">
-            Our investors of <span className="text-[#ff5d3b]">✶ Network project</span>
-          </h2>
-
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-6 pt-6">
-            {/* OpenSea boat icon outline */}
-            <div className="partner-circle" title="OpenSea Network">
-              <svg className="w-10 h-10 opacity-75" viewBox="0 0 40 40" fill="currentColor">
-                <path d="M20 5C11.7 5 5 11.7 5 20s6.7 15 15 15 15-6.7 15-15S28.3 5 20 5zm5 11.7l-4.5 4.5-1.5-1.5L25 15.7l1 1zm-8.8 8.1l-1.5-1.5L18 20l1.5 1.5-3.3 3.3z" />
-              </svg>
-            </div>
-
-            {/* Binance Diamond Outline */}
-            <div className="partner-circle" title="Binance Matrix">
-              <svg className="w-8 h-8 opacity-75" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L4 10l8 8 8-8-8-8zm0 3.6L16.4 10 12 14.4 7.6 10 12 5.6z M12 17.6l-5.6-5.6-1.4 1.4L12 20.4l7-7-1.4-1.4-5.6 5.6z" />
-              </svg>
-            </div>
-
-            {/* Eagle Outline */}
-            <div className="partner-circle" title="Falcon Security">
-              <svg className="w-8 h-8 opacity-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 3L4 6v6c0 5.5 3.5 10.5 8 12 4.5-1.5 8-6.5 8-12V6l-8-3z M12 6l5 5h-4v6h-2v-6H7l5-5z" />
-              </svg>
-            </div>
-
-            {/* Solid Orange Circle styled with SLICE text */}
-            <div className="partner-circle-orange relative" title="Slice API Platform">
-              <div className="flex flex-col items-center">
-                <span className="font-sans font-extrabold tracking-tighter text-black text-sm italic select-none">SLICE</span>
-                <span className="absolute bottom-3 right-3 text-[9px] text-black">↗</span>
-              </div>
-            </div>
-
-            {/* Petal text circle */}
-            <div className="partner-circle font-sans font-semibold tracking-tight text-sm select-none" title="Petal Labs">
-              Petal
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. TECHNOLOGY MATRIX (SECTION 04) */}
-      <section id="tech-section" className="py-28 px-6 md:px-12 border-t border-white/5 bg-[#08080a]/45 relative overflow-hidden tech-grid-trigger">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="flex items-center justify-between border-b border-white/5 pb-6">
-            <div>
-              <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">[ module.04 // technology.matrix ]</span>
-              <h2 className="text-2xl font-serif italic text-white/90 mt-1">the.stack.matrix</h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            
-            {/* Tech 1: React */}
-            <div className="tech-card border border-white/5 bg-black/35 p-8 rounded-[24px] flex flex-col justify-between hover:border-[#ff5d3b]/20 hover:bg-white/2 transition-all group cursor-none">
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">01 / frontend</span>
-              <div className="mt-8">
-                <h3 className="text-xl font-serif text-white group-hover:text-[#ff5d3b] transition-all">React.js</h3>
-                <p className="text-[9px] font-mono text-white/40 mt-1 uppercase">Vite + Tailwind v4 Compiler</p>
-              </div>
-            </div>
-
-            {/* Tech 2: FastAPI */}
-            <div className="tech-card border border-white/5 bg-black/35 p-8 rounded-[24px] flex flex-col justify-between hover:border-[#ff5d3b]/20 hover:bg-white/2 transition-all group cursor-none">
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">02 / backend</span>
-              <div className="mt-8">
-                <h3 className="text-xl font-serif text-white group-hover:text-[#ff5d3b] transition-all">FastAPI</h3>
-                <p className="text-[9px] font-mono text-white/40 mt-1 uppercase">Async Python API Gateway</p>
-              </div>
-            </div>
-
-            {/* Tech 3: GSAP */}
-            <div className="tech-card border border-white/5 bg-black/35 p-8 rounded-[24px] flex flex-col justify-between hover:border-[#ff5d3b]/20 hover:bg-white/2 transition-all group cursor-none">
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">03 / animation</span>
-              <div className="mt-8">
-                <h3 className="text-xl font-serif text-white group-hover:text-[#ff5d3b] transition-all">GSAP</h3>
-                <p className="text-[9px] font-mono text-white/40 mt-1 uppercase">Scroll Trigger & Easing Physics</p>
-              </div>
-            </div>
-
-            {/* Tech 4: Librosa */}
-            <div className="tech-card border border-white/5 bg-black/35 p-8 rounded-[24px] flex flex-col justify-between hover:border-[#ff5d3b]/20 hover:bg-white/2 transition-all group cursor-none">
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">04 / speech.dsp</span>
-              <div className="mt-8">
-                <h3 className="text-xl font-serif text-white group-hover:text-[#ff5d3b] transition-all">Librosa</h3>
-                <p className="text-[9px] font-mono text-white/40 mt-1 uppercase">Spectral Feature Extraction</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      {/* Sections 03 and 04 (Investors & Tech Stack) removed to optimize focus on Neural Voice Analyzer */}
 
       {/* 7. MINIMALIST EDITORIAL FOOTER */}
-      <footer className="py-20 px-6 md:px-12 border-t border-white/5 text-white/40 text-[10px] font-mono uppercase tracking-widest bg-[#08080a]">
+      <footer className="py-20 px-6 md:px-12 border-t border-black/5 text-[#0f172a]/50 text-xs font-mono uppercase tracking-widest bg-[#f8f8fa]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div className="space-y-1">
-            <p className="text-white/60 font-bold tracking-widest">S.P.E.C.T.R.A. lab</p>
-            <p className="text-[9px]">© 2026 all rights reserved // tokyo node</p>
+            <p className="text-[#0f172a]/70 font-bold tracking-widest">S.P.E.C.T.R.A. lab</p>
+            <p className="text-[10px]">© 2026 all rights reserved // tokyo node</p>
           </div>
           
-          <div className="flex gap-6 lowercase text-[9px]">
-            <a href="#" className="hover:text-white transition-colors cursor-none">github</a>
-            <a href="#" className="hover:text-white transition-colors cursor-none">documentation</a>
-            <a href="#" className="hover:text-white transition-colors cursor-none">legal</a>
+          <div className="flex gap-6 lowercase text-xs">
+            <a href="#" className="hover:text-[#e11d48] transition-colors cursor-none">github</a>
+            <a href="#" className="hover:text-[#e11d48] transition-colors cursor-none">documentation</a>
+            <a href="#" className="hover:text-[#e11d48] transition-colors cursor-none">legal</a>
           </div>
 
           <div className="flex items-center gap-2">

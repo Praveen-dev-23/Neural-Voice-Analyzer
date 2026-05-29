@@ -38,54 +38,54 @@ const AnalysisHistory = ({ history = [], onLoadHistory = null, onDeleteHistory =
   };
 
   return (
-    <div className="editorial-panel p-5 rounded-lg border border-white/5 bg-[#0c0c0e]/60 relative overflow-hidden flex flex-col h-full">
+    <div className="editorial-panel p-5 relative overflow-hidden flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <History className="w-4 h-4 text-[#ff5d3b]" />
-          <h2 className="text-[11px] font-mono font-bold text-white/80 uppercase tracking-widest">
+        <div className="flex items-center gap-2.5">
+          <History className="w-4 h-4 text-[#e11d48]" />
+          <h2 className="text-xs font-mono font-bold text-[#0f172a] uppercase tracking-widest">
             DIAGNOSTICS ARCHIVE & AUDIT LOG
           </h2>
         </div>
-        <span className="text-[9px] font-mono text-white/40 bg-white/5 px-2 py-0.5 rounded border border-white/5">
+        <span className="text-[10px] font-mono text-slate-500 bg-slate-50 px-2 py-0.5 rounded border border-slate-200">
           RECORDS: {history.length}
         </span>
       </div>
 
       <div className="flex-1 overflow-y-auto max-h-[220px] min-h-[140px] pr-1">
         {history.length > 0 ? (
-          <div className="w-full border border-white/5 rounded overflow-hidden">
-            <table className="w-full text-left border-collapse text-[10px] font-mono">
+          <div className="w-full border border-slate-100 rounded overflow-hidden">
+            <table className="w-full text-left border-collapse text-xs font-mono">
               <thead>
-                <tr className="bg-black/30 border-b border-white/5 text-white/40">
-                  <th className="p-2 uppercase font-medium">Source / File</th>
-                  <th className="p-2 uppercase font-medium">Classification</th>
-                  <th className="p-2 uppercase font-medium">Conf</th>
-                  <th className="p-2 uppercase font-medium text-right">Actions</th>
+                <tr className="bg-slate-50 border-b border-slate-100 text-slate-500">
+                  <th className="p-2 uppercase font-bold">Source / File</th>
+                  <th className="p-2 uppercase font-bold">Classification</th>
+                  <th className="p-2 uppercase font-bold">Conf</th>
+                  <th className="p-2 uppercase font-bold text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-100">
                 {history.map((item) => {
                   const isAI = item.prediction?.toLowerCase().includes('ai');
                   const dateStr = new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                   
                   return (
-                    <tr key={item.id} className="hover:bg-white/2 transition-colors text-white/80">
+                    <tr key={item.id} className="hover:bg-slate-50/50 transition-colors text-slate-800">
                       <td className="p-2 max-w-[130px] truncate">
-                        <div className="font-bold truncate" title={item.filename}>{item.filename}</div>
-                        <div className="text-[8px] text-white/30">{dateStr}</div>
+                        <div className="font-bold truncate text-[#0f172a]" title={item.filename}>{item.filename}</div>
+                        <div className="text-[10px] text-slate-400">{dateStr}</div>
                       </td>
                       <td className="p-2">
-                        <span className={`font-bold uppercase ${isAI ? 'text-[#ff5d3b]' : 'text-[#8cb6b4]'}`}>
+                        <span className={`font-bold uppercase ${isAI ? 'text-[#e11d48]' : 'text-[#0f766e]'}`}>
                           {isAI ? 'AI VOICE' : 'HUMAN'}
                         </span>
                       </td>
-                      <td className="p-2 font-bold">{item.confidence_percentage}%</td>
+                      <td className="p-2 font-bold text-[#0f172a]">{item.confidence_percentage}%</td>
                       <td className="p-2 text-right space-x-1.5 whitespace-nowrap">
                         {onLoadHistory && (
                           <button
                             onClick={() => onLoadHistory(item)}
                             title="Load Diagnostics"
-                            className="p-1 hover:text-[#ff5d3b] text-white/40 hover:bg-white/5 rounded transition-all inline-block"
+                            className="p-1 hover:text-[#e11d48] text-slate-400 hover:bg-slate-150 rounded transition-all inline-block"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </button>
@@ -93,7 +93,7 @@ const AnalysisHistory = ({ history = [], onLoadHistory = null, onDeleteHistory =
                         <button
                           onClick={() => exportReport(item)}
                           title="Export Report"
-                          className="p-1 hover:text-[#ff5d3b] text-white/40 hover:bg-white/5 rounded transition-all inline-block"
+                          className="p-1 hover:text-[#e11d48] text-slate-400 hover:bg-slate-150 rounded transition-all inline-block"
                         >
                           <Download className="w-3.5 h-3.5" />
                         </button>
@@ -101,7 +101,7 @@ const AnalysisHistory = ({ history = [], onLoadHistory = null, onDeleteHistory =
                           <button
                             onClick={() => onDeleteHistory(item.id)}
                             title="Purge Record"
-                            className="p-1 hover:text-red-500 text-white/40 hover:bg-white/5 rounded transition-all inline-block"
+                            className="p-1 hover:text-red-500 text-slate-400 hover:bg-slate-150 rounded transition-all inline-block"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -114,12 +114,12 @@ const AnalysisHistory = ({ history = [], onLoadHistory = null, onDeleteHistory =
             </table>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center text-center p-6 h-full bg-black/20 border border-dashed border-white/5 rounded">
-            <FileText className="w-6 h-6 text-white/20 mb-2" />
-            <p className="text-xs text-white/40 font-mono">
+          <div className="flex flex-col items-center justify-center text-center p-6 h-full bg-slate-50/50 border border-dashed border-slate-200 rounded">
+            <FileText className="w-6 h-6 text-slate-400 mb-2" />
+            <p className="text-xs text-slate-500 font-mono font-bold">
               Diagnostics database empty.
             </p>
-            <p className="text-[8px] text-white/20 mt-0.5 uppercase tracking-wider font-mono">
+            <p className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-wider font-mono">
               Telemetry logs will register here.
             </p>
           </div>
