@@ -39,7 +39,7 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
             </div>
             <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
               <div 
-                className="h-full bg-white transition-all duration-200"
+                className="h-full bg-[#ff5d3b] transition-all duration-200"
                 style={{ width: `${volumePercent}%` }}
               ></div>
             </div>
@@ -57,7 +57,7 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
             </div>
             <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
               <div 
-                className="h-full bg-white transition-all duration-200"
+                className="h-full bg-[#ff5d3b] transition-all duration-200"
                 style={{ width: `${pitchPercent}%` }}
               ></div>
             </div>
@@ -73,7 +73,7 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
             </div>
             <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
               <div 
-                className="h-full bg-white transition-all duration-200"
+                className="h-full bg-[#ff5d3b] transition-all duration-200"
                 style={{ width: `${zcrPercent}%` }}
               ></div>
             </div>
@@ -89,7 +89,7 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
             </div>
             <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
               <div 
-                className="h-full bg-white transition-all duration-200"
+                className="h-full bg-[#ff5d3b] transition-all duration-200"
                 style={{ width: `${centroidPercent}%` }}
               ></div>
             </div>
@@ -130,16 +130,16 @@ const DiagnosticsPanel = ({ metrics = null, flags = null }) => {
             {flags ? (
               <div className="space-y-1 font-mono text-[9px]">
                 {flags.robotic_flat_pitch && (
-                  <div className="text-red-400">• flat pitch envelope detected (robotic)</div>
+                  <div className="text-[#ff5d3b]">• flat pitch envelope detected (robotic)</div>
                 )}
                 {flags.pitch_jitter_anomaly && (
-                  <div className="text-red-400">• pitch jitter anomaly active (glitch)</div>
+                  <div className="text-[#ff5d3b]">• pitch jitter anomaly active (glitch)</div>
                 )}
                 {flags.high_freq_flatness && (
-                  <div className="text-red-400">• spectral flare active (vocoder buzz)</div>
+                  <div className="text-[#ff5d3b]">• spectral flare active (vocoder buzz)</div>
                 )}
                 {flags.oversmoothed_mel_envelope && (
-                  <div className="text-red-400">• oversmoothed mel envelope (synthetic)</div>
+                  <div className="text-[#ff5d3b]">• oversmoothed mel envelope (synthetic)</div>
                 )}
                 {flags.anomalous_centroid && (
                   <div className="text-white/50">• anomalous centroid center</div>

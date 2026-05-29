@@ -107,7 +107,7 @@ const AudioVisualizer = ({
 
           // Glowing peak markers
           if (barHeight > 5) {
-            ctx.fillStyle = 'rgba(0, 242, 254, 0.75)'; // Soft cyan accent
+            ctx.fillStyle = 'rgba(255, 93, 59, 0.9)'; // Soft orange accent
             ctx.fillRect(x, H - barHeight - 2, barWidth - 3, 1.5);
           }
 
@@ -126,7 +126,7 @@ const AudioVisualizer = ({
 
         analyserNode.getByteFrequencyData(dataArrayFreq);
 
-        ctx.fillStyle = '#050505';
+        ctx.fillStyle = '#08080a';
         ctx.fillRect(0, 0, W, H);
 
         let sum = 0;
@@ -137,7 +137,7 @@ const AudioVisualizer = ({
         const baseRadius = 50 + (avgFreq / 255) * 12;
 
         // Circular background guides
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(centerX, centerY, baseRadius - 10, 0, 2 * Math.PI);
@@ -167,20 +167,20 @@ const AudioVisualizer = ({
         }
 
         // Sleek core overlay
-        ctx.fillStyle = 'rgba(10, 10, 10, 0.95)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.fillStyle = 'rgba(10, 10, 12, 0.95)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(centerX, centerY, baseRadius - 2, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
 
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
         ctx.font = '9px JetBrains Mono';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('CORE RADIAL', centerX, centerY - 5);
-        ctx.fillStyle = 'rgba(0, 242, 254, 0.8)';
+        ctx.fillStyle = 'rgba(255, 93, 59, 0.85)';
         ctx.fillText(`${Math.round(avgFreq)} db`, centerX, centerY + 8);
       }
 
@@ -204,7 +204,7 @@ const AudioVisualizer = ({
           spectrogramHistoryRef.current.shift();
         }
 
-        ctx.fillStyle = '#050505';
+        ctx.fillStyle = '#08080a';
         ctx.fillRect(0, 0, W, H);
 
         const history = spectrogramHistoryRef.current;
@@ -216,19 +216,19 @@ const AudioVisualizer = ({
             const val = frame[yBin];
             const normVal = val / 255;
 
-            // Premium Luxury Palette: Pure dark to electric purple/indigo to crisp white highlights
+            // Redesigned Copper-to-Orange-to-White Palette
             let color;
             if (normVal < 0.08) {
-              color = `rgba(5, 5, 5, ${normVal * 12})`;
+              color = `rgba(8, 8, 10, ${normVal * 12})`;
             } else if (normVal < 0.45) {
               const p = (normVal - 0.08) / 0.37;
-              color = `rgb(${Math.floor(p * 50)}, ${Math.floor(p * 20)}, ${Math.floor(25 + p * 120)})`; // Dark Indigo
-            } else if (normVal < 0.8) {
-              const p = (normVal - 0.45) / 0.35;
-              color = `rgb(${Math.floor(50 + p * 70)}, ${Math.floor(20 + p * 200)}, 255)`; // Electric Blue
+              color = `rgb(${Math.floor(8 + p * 90)}, ${Math.floor(8 + p * 25)}, ${Math.floor(10 + p * 10)})`; // Copper red/brown
+            } else if (normVal < 0.85) {
+              const p = (normVal - 0.45) / 0.4;
+              color = `rgb(${Math.floor(98 + p * 157)}, ${Math.floor(33 + p * 60)}, ${Math.floor(20 + p * 39)})`; // Neon orange-coral
             } else {
-              const p = (normVal - 0.8) / 0.2;
-              color = `rgb(${Math.floor(120 + p * 135)}, 255, 255)`; // Cyan/White highlights
+              const p = (normVal - 0.85) / 0.15;
+              color = `rgb(255, ${Math.floor(93 + p * 162)}, ${Math.floor(59 + p * 196)})`; // Orange to white
             }
 
             ctx.fillStyle = color;
@@ -262,7 +262,7 @@ const AudioVisualizer = ({
       const cellWidth = W / numFrames;
       const cellHeight = H / numMels;
 
-      ctx.fillStyle = '#050505';
+      ctx.fillStyle = '#08080a';
       ctx.fillRect(0, 0, W, H);
 
       for (let y = 0; y < numMels; y++) {
@@ -271,16 +271,16 @@ const AudioVisualizer = ({
 
           let color;
           if (normVal < 0.08) {
-            color = `rgba(5, 5, 5, ${normVal * 12})`;
+            color = `rgba(8, 8, 10, ${normVal * 12})`;
           } else if (normVal < 0.45) {
             const p = (normVal - 0.08) / 0.37;
-            color = `rgb(${Math.floor(p * 50)}, ${Math.floor(p * 20)}, ${Math.floor(25 + p * 120)})`; // Indigo
-          } else if (normVal < 0.8) {
-            const p = (normVal - 0.45) / 0.35;
-            color = `rgb(${Math.floor(50 + p * 70)}, ${Math.floor(20 + p * 200)}, 255)`; // Blue
+            color = `rgb(${Math.floor(8 + p * 90)}, ${Math.floor(8 + p * 25)}, ${Math.floor(10 + p * 10)})`;
+          } else if (normVal < 0.85) {
+            const p = (normVal - 0.45) / 0.4;
+            color = `rgb(${Math.floor(98 + p * 157)}, ${Math.floor(33 + p * 60)}, ${Math.floor(20 + p * 39)})`;
           } else {
-            const p = (normVal - 0.8) / 0.2;
-            color = `rgb(${Math.floor(120 + p * 135)}, 255, 255)`; // Cyan-White
+            const p = (normVal - 0.85) / 0.15;
+            color = `rgb(255, ${Math.floor(93 + p * 162)}, ${Math.floor(59 + p * 196)})`;
           }
 
           ctx.fillStyle = color;

@@ -14,19 +14,19 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
   const isAI = prediction?.toLowerCase().includes('ai') ?? false;
   const hasPrediction = !!prediction;
 
-  let accentColor = '#00f2fe'; // cyan
+  let accentColor = '#d3e9e8'; // pale teal
   let textClass = 'text-white';
-  let indicatorGlow = 'rgba(0, 242, 254, 0.1)';
+  let indicatorGlow = 'rgba(211, 233, 232, 0.05)';
 
   if (hasPrediction) {
     if (isAI) {
-      accentColor = 'rgb(255, 0, 85)'; // Crimson Pink
-      textClass = 'text-[#ff0055] text-glow-red';
-      indicatorGlow = 'rgba(255, 0, 85, 0.1)';
+      accentColor = '#ff5d3b'; // Orange Coral
+      textClass = 'text-[#ff5d3b] text-glow-orange';
+      indicatorGlow = 'rgba(255, 93, 59, 0.12)';
     } else {
-      accentColor = 'rgb(0, 245, 212)'; // Mint Green
-      textClass = 'text-[#00f5d4] text-glow-green';
-      indicatorGlow = 'rgba(0, 245, 212, 0.1)';
+      accentColor = '#d3e9e8'; // Pale slate teal
+      textClass = 'text-[#d3e9e8] text-glow-white';
+      indicatorGlow = 'rgba(211, 233, 232, 0.1)';
     }
   }
 
@@ -130,8 +130,8 @@ const PredictionGauge = ({ result = null, isProcessing = false }) => {
               </div>
               <div className="h-[2px] w-full bg-white/10 rounded overflow-hidden">
                 <div 
-                  className="h-full bg-white transition-all duration-300"
-                  style={{ width: `${anomalyScore * 100}%` }}
+                  className="h-full transition-all duration-300"
+                  style={{ width: `${anomalyScore * 100}%`, backgroundColor: accentColor }}
                 ></div>
               </div>
             </div>
